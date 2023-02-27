@@ -32,6 +32,11 @@ if (!filter_var($_GET['wsdl'], FILTER_VALIDATE_URL)) {
     response('El WSDL proporcionado no es una URL válida', 400);
 }
 
+// Check if url is wsdl
+if (pathinfo($_GET['wsdl'], PATHINFO_EXTENSION) !== 'wsdl') {
+    response('La URL proporcionada no es un WSDL', 400);
+}
+
 // Check if WSDL URL is reachable
 if (!@fopen($_GET['wsdl'], 'r')) {
     response('El WSDL proporcionado no es alcanzable', 400);
