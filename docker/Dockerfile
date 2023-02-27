@@ -3,6 +3,7 @@ FROM php:5.6-apache
 # Arguments defined in docker-compose.yml
 ARG user
 ARG uid
+
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
     sudo \
@@ -17,6 +18,7 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nano
+
 
 # Clear cache
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
