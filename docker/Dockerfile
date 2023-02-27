@@ -1,4 +1,4 @@
-FROM php:5.6.40-apache
+FROM php:5.6-apache
 
 # Arguments defined in docker-compose.yml
 ARG user
