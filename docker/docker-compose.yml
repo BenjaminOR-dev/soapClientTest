@@ -11,3 +11,9 @@ services:
     image: soap-test
     container_name: soap-test-php
     restart: unless-stopped
+    networks:
+      - my-network
+
+networks:
+    my-network:
+      driver: bridge
