@@ -12,7 +12,7 @@ function response($data = null, $httpCode = 200)
     http_response_code($httpCode);
     echo json_encode([
         'http_status_code' => $httpCode,
-        'data'      => $data
+        'data' => $data
     ]);
     exit;
 }
@@ -32,11 +32,6 @@ if (!filter_var($_GET['wsdl'], FILTER_VALIDATE_URL)) {
     response('El WSDL proporcionado no es una URL válida', 400);
 }
 
-// Check if url is wsdl
-if (pathinfo($_GET['wsdl'], PATHINFO_EXTENSION) !== 'wsdl') {
-    response('La URL proporcionada no es un WSDL', 400);
-}
-
 // Check if WSDL URL is reachable
 if (!@fopen($_GET['wsdl'], 'r')) {
     response('El WSDL proporcionado no es alcanzable', 400);
@@ -45,8 +40,8 @@ if (!@fopen($_GET['wsdl'], 'r')) {
 // Create SOAP Client
 try {
     $client = new SoapClient($_GET['wsdl']);
-} catch (Exception $e) {
-    response('Error al crear el cliente SOAP: ' . $e->getMessage(), 500);
+} catch (\Exception $e) {
+    response("Error al crear el cliente SOAP: {$e->getMessage()}", 500);
 }
 
 response([
