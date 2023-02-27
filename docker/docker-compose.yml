@@ -1,0 +1,19 @@
+version: '3.7'
+services:
+  server:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - 80:80
+    volumes:
+      - ./../:/var/www/html/
+    image: soap-test
+    container_name: soap-test-php
+    restart: unless-stopped
+    networks: 
+      - my-network
+
+networks:
+  my-network:
+    driver: bridge
